@@ -11,21 +11,11 @@ const Providers = (function() {
 
   async function init() {
     // Get provider data.
-    await fetchData().then((data) => {
-      // Populate based on the returned data.
-      populate(data);
-    });
-  }
-
-  /**
-   * Fetches provider data.
-   */
-  async function fetchData() {
-    return await fetch("https://tch-bus-dev-waittimes-aps-01.tch-bus-dev-ase-01.p.azurewebsites.net/PublicServices/GetWaitTimes.svc/AllProviderWaitTimes")
+    await fetch("https://tch-bus-dev-waittimes-aps-01.tch-bus-dev-ase-01.p.azurewebsites.net/PublicServices/GetWaitTimes.svc/AllProviderWaitTimes")
+      // Get JSON from result.
       .then(response => response.json())
-      .then(data => {
-        return JSON.parse(data.d);
-      });
+      // Parse JSON and populate providers from data.
+      .then(data => populate(JSON.parse(data.d)));
   }
 
   /**
