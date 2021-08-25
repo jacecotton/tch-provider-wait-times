@@ -9,14 +9,14 @@ const Providers = (function() {
   // Get "no results" message.
   const noResultsMessage = document.querySelector(".no-results-message");
 
-  async function init() {
+  (async () => {
     // Get provider data.
     await fetch("https://tch-bus-dev-waittimes-aps-01.tch-bus-dev-ase-01.p.azurewebsites.net/PublicServices/GetWaitTimes.svc/AllProviderWaitTimes")
       // Get JSON from result.
       .then(response => response.json())
       // Parse JSON and populate providers from data.
       .then(data => populate(JSON.parse(data.d)));
-  }
+  })();
 
   /**
    * Populates empty unordered list with list items containing provider data.
@@ -148,9 +148,6 @@ const Providers = (function() {
   }
 
   return {
-    init: init,
     filter: filter,
   };
 }());
-
-Providers.init();
