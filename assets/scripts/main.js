@@ -11,7 +11,7 @@ const Providers = (function() {
 
   async function init() {
     // Get provider data.
-    const providers = await fetchData().then((data) => {
+    await fetchData().then((data) => {
       // Populate based on the returned data.
       populate(data);
     });
