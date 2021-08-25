@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Provider Wait Times | Texas Children's Hospital</title>
+
+  <base href="">
+
+  <link href="styles/main.css" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="boxed-width">
+      <a href="/" title="Home" class="site-header__logo-link" rel="home">
+        <img src="images/logo.svg" alt="Texas Children's Hospital" class="site-header__logo-image">
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div class="boxed-width">
+      <h1>Average Provider Wait Times</h1>
+
+      <!-- <p class="lede">
+        Demo text, this tool is to help you estimate your wait time.
+      </p> -->
+
+      <div class="provider-search-container">
+        <label for="provider-search" class="visually-hidden">Search for your provider</label>
+        <input type="text" id="provider-search" name="provider-search" placeholder="Search for your provider" onkeyup="Providers.filter(this.value)" aria-controls="provider-results">
+        <img src="images/icons/search.svg" class="provider-search-icon" alt="" role="presentation" title="Start typing...">
+      </div>
+    </div>
+
+    <ul id="provider-results" aria-live="polite">
+      <li class="no-results-message boxed-width">No results</li>
+    </ul>
+  </main>
+
+<script src="scripts/main.js"></script>
+</body>
+</html>

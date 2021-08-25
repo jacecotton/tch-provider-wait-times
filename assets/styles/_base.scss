@@ -1,0 +1,92 @@
+/**
+ * This file is a boilerplate similar to a reset or normalize file, but is more
+ * focused on basic UX enhancements rather than eliminating browser defaults.
+ */
+
+/**
+ * 1. Better default box model (`padding` will now not add to an element's
+ *    calculated dimensions, but will instead push content inwards).
+ * 2. Remove default spacing on all elements.
+ * 3. Respect motion preferences by turning animations and transitions off
+ *    according to system settings.
+ * 4. Also disable animations and transitions for displays with a low refresh
+ *    rate, which would display them poorly.
+ * 5. Reduce motion by setting animations and transitions to become
+ *    imperceptibly fast, rather than turn them off completely, so that
+ *    `transitionend` events still fire.
+ * 6. Prevent infinite animations entirely, since infinitely-running high-speed
+ *    animations would be undesirable.
+ * 7. Reduce motion by removing animated scrolling to anchor elements.
+ */
+
+ * {
+  box-sizing: border-box; // 1
+  margin: 0; // 2
+  padding: 0; // 2
+  
+  &::before,
+  &::after {
+    box-sizing: border-box; // 1
+  }
+  
+  @media screen and
+    (prefers-reduced-motion: reduce), // 3
+    (update: slow) { // 4
+    animation-duration: .001ms !important; // 5
+    transition-duration: .001ms !important; // 5
+    animation-iteration-count: 1 !important; // 6
+    scroll-behavior: auto; // 7
+  }
+}
+
+/**
+ * 1. Prevent horizontal overflow.
+ * 2. Prevent viewport overscrolling on touch and track pad devices.
+ * 3. Animate scrolling to anchor elements to help users better understand the
+ *    direction and location of the target element.
+ * 4. Prevent text size changes (triggering reflow) on mobile orientation
+ *    changes.
+ */
+
+body {
+  max-width: 100vw; // 1
+  overflow-x: hidden; // 1
+  overscroll-behavior-y: none; // 2
+  scroll-behavior: smooth; // 3
+  text-size-adjust: 100%; // 4
+}
+
+/**
+ * 1. Remove tapping delay on interactive elements on mobile devices.
+ * 2. Remove iOS tap highlight.
+ */
+
+a,
+button,
+input,
+label,
+select,
+[tabindex],
+textarea {
+  touch-action: manipulation; // 1
+  -webkit-tap-highlight-color: transparent; // 2
+}
+
+/**
+ * 1. Keep image height proportionate to its width.
+ * 2. Prevent images from expanding the parent.
+ */
+
+img {
+  height: auto; // 1
+  max-width: 100%; // 2
+}
+
+/**
+ * 1. Strengthen the `[hidden]` attribute so that it overrides `display`
+ *    properties set within other rulesets.
+ */
+
+[hidden] {
+  display: none !important; // 1
+}

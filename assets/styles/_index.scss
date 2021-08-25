@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
+
+body {
+  color: color("dark-gray");
+  font-family: Roboto, sans-serif;
+}
+
+main {
+  background: color("light-gray");
+  padding-top: 3rem;
+}
+
+h1 {
+  font-size: font-size("large-2");
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.lede {
+  color: color("dark-gray");
+  font-size: font-size("medium");
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
+[id=provider-search] {
+  appearance: none;
+  border: 1px solid #e3e2e2;
+  border-radius: 5px;
+  box-shadow: 0 1px 1px #e3e2e2;
+  color: color("dark-gray");
+  font-family: inherit;
+  font-size: font-size("large-1");
+  font-weight: 500;
+  margin-bottom: 2rem;
+  padding: 1rem 1.5rem;
+  width: 100%;
+
+  &::placeholder {
+    color: color("dark-gray");
+  }
+}
+
+.provider-search-container {
+  position: relative;
+}
+
+.provider-search-icon {
+  $icon-size: 1.75rem;
+
+  background-color: theme-color("main");
+  width: $icon-size;
+  height: $icon-size;
+  border-radius: $icon-size;
+  padding: .3rem;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-100%);
+}
+
+[id=provider-results] {
+  list-style: none;
+}
+
+.provider-result {
+  animation: expand .5s cubic-bezier(0, 1, .4, 1);
+  overflow: hidden;
+  padding: 2rem 0;
+
+  &:nth-of-type(even) {
+    background: #fff;
+  }
+
+  &[data-transition=hiding] {
+    animation: shrink .7s cubic-bezier(0, 1, .4, 1);
+    transform-origin: center;
+
+    .provider-result__icon {
+      display: none;
+    }
+  }
+
+  @keyframes expand {
+    0% {
+      font-size: 0;
+      opacity: 0;
+      padding: 0;
+    }
+
+    27% {
+      font-size: initial;
+      opacity: 0;
+      padding: 2rem 0;
+      transform: scale(.95);
+    }
+    
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes shrink {
+    to {
+      height: 0;
+      opacity: 0;
+      padding: 0;
+    }
+  }
+
+  .boxed-width {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__name {
+    font-size: font-size("large-1");
+    font-weight: 700;
+    margin-bottom: .75rem;
+  }
+
+  &__sub {
+    color: color("dark-gray");
+    font-size: font-size("medium");
+    font-weight: 300;
+  }
+
+  &__icon {
+    $icon-size: 1.75rem;
+
+    border-radius: $icon-size;
+    display: flex;
+    background: color("green");
+    height: $icon-size;
+    width: $icon-size;
+    flex-shrink: 0;
+    margin-left: auto;
+    padding: .3rem;
+  }
+}
+
+.no-results-message {
+  font-size: font-size("large-1");
+  font-weight: 500;
+  padding: 2rem 0 4rem;
+}

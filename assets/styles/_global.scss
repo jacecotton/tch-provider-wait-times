@@ -1,0 +1,81 @@
+$colors: (
+  "red": hsl(356 71% 50%),
+  "green": hsl(86 39% 52%),
+  "light-gray": hsl(220 27% 98%),
+  "med-gray": hsl(0 0% 65%),
+  "dark-gray": hsl(0 0% 23%),
+);
+
+@function color($color) {
+  @if map-has-key($colors, $color) {
+    @return map-get($colors, $color);
+  }
+}
+
+$theme-colors: (
+  "main": color("red"),
+);
+
+@function theme-color($color) {
+  @if map-has-key($theme-colors, $color) {
+    @return map-get($theme-colors, $color);
+  }
+}
+
+$max-width: 1300px;
+$outer-gutter: 3rem;
+
+$font-sizes: (
+  "medium": clamp(.8rem, .8rem + .3vw, 1rem),
+  "large-1": clamp(1rem, 1rem + .3vw, 1.25rem),
+  "large-2": clamp(1.5rem, 1.5rem + .75vw, 2rem),
+);
+
+@function font-size($size) {
+  @if map-has-key($font-sizes, $size) {
+    @return map-get($font-sizes, $size);
+  }
+}
+
+.site-header {
+  --header-height: 6rem;
+
+  background: color("light-gray");
+  border-bottom: 1px solid hsl(0 0% 0% / 10%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  height: var(--header-height);
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  padding-top: env(safe-area-inset-top);
+
+  @media screen and (min-width: 720px) {
+    --header-height: 8rem;
+  }
+
+  &__logo {
+    &-link {
+      display: block;
+      width: var(--header-height);
+    }
+  }
+}
+
+.boxed-width {
+  margin: 0 auto;
+  max-width: $max-width;
+  width: calc(100vw - #{$outer-gutter});
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
+  display: inherit;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
