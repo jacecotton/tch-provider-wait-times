@@ -23,10 +23,6 @@
     <div class="boxed-width">
       <h1>Average Provider Wait Times</h1>
 
-      <!-- <p class="lede">
-        Demo text, this tool is to help you estimate your wait time.
-      </p> -->
-
       <div class="provider-search-container">
         <label for="provider-search" class="visually-hidden">Search for your provider</label>
         <input type="text" id="provider-search" name="provider-search" placeholder="Search for your provider" onkeyup="Providers.filter(this.value)" aria-controls="provider-results">
@@ -35,7 +31,8 @@
     </div>
 
     <ul id="provider-results" aria-live="polite">
-      <li class="no-results-message boxed-width">No results</li>
+      <li class="loading-message boxed-width">Loading provider wait times...</li>
+      <li hidden class="no-results-message boxed-width">No results</li>
     </ul>
   </main>
 

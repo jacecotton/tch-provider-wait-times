@@ -140,7 +140,8 @@ h1 {
   }
 }
 
-.no-results-message {
+.no-results-message,
+.loading-message {
   font-size: font-size("large-1");
   font-weight: 500;
   padding: 2rem 0 4rem;
