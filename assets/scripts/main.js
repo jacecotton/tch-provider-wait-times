@@ -11,7 +11,7 @@ const Providers = (function() {
 
   (async () => {
     // Get provider data.
-    await fetch("https://tch-bus-dev-waittimes-aps-01.tch-bus-dev-ase-01.p.azurewebsites.net/PublicServices/GetWaitTimes.svc/AllProviderWaitTimes")
+    await fetch("https://tchcustomservices.texaschildrens.org/PublicServices/GetWaitTimes.svc/AllProviderWaitTimes")
       // Get JSON from result.
       .then(response => response.json())
       // Parse JSON and populate providers from data.
@@ -22,6 +22,8 @@ const Providers = (function() {
    * Populates empty unordered list with list items containing provider data.
    */
   function populate(providers) {
+    console.log(providers);
+    
     providers.forEach((provider) => {
       // Destructure provider properties.
       const { ProviderID, DepartmentID, ProviderName, DepartmentName, WaitTime } = provider;
