@@ -20,12 +20,6 @@ const Providers = (function() {
 
         // Remove loading message.
         loadingMessage.remove();
-
-        // Add hook indicating data has been successfully populated.
-        resultsList.setAttribute("data-populated", true);
-
-        // Get populated items.
-        resultItems = document.querySelectorAll(".provider-result");
       });
   })();
 
@@ -58,6 +52,12 @@ const Providers = (function() {
       // Convert result string to fragment and append to results ul.
       resultsList.appendChild(document.createRange().createContextualFragment(result));
     });
+
+    // Add hook indicating data has been successfully populated.
+    resultsList.setAttribute("data-populated", true);
+
+    // Get populated items.
+    resultItems = document.querySelectorAll(".provider-result");
   }
 
   /**

@@ -58,21 +58,21 @@ const tasks = {
     return src(config.scripts.src)
       .pipe(sourcemaps.init())
       .pipe(concat("main.js"))
-      // .pipe(babel({
-      //   presets: [
-      //     [
-      //       '@babel/env',
-      //       {
-      //         targets: {
-      //           "chrome": "70",
-      //           // "ie": "11",
-      //           "safari": "13",
-      //         },
-      //       },
-      //     ],
-      //   ],
-      // }))
-      // .pipe(terser())
+      .pipe(babel({
+        presets: [
+          [
+            '@babel/env',
+            {
+              targets: {
+                "chrome": "70",
+                // "ie": "11",
+                "safari": "13",
+              },
+            },
+          ],
+        ],
+      }))
+      .pipe(terser())
       .pipe(sourcemaps.write("."))
       .pipe(dest(config.scripts.dest));
   },
