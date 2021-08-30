@@ -1,8 +1,8 @@
 const Providers = (function() {
   // Get results unordered list.
   const resultsList = document.getElementById("provider-results");
-  // Initialize result list items (to be set after results are populated from
-  // API).
+  // Initialize result list items with outer scope (to be set after results are
+  // populated from API).
   let resultItems;
   // Get loading message.
   const loadingMessage = document.querySelector(".loading-message");
@@ -14,16 +14,25 @@ const Providers = (function() {
     await fetch("https://tchcustomservices.texaschildrens.org/PublicServices/GetWaitTimes.svc/AllProviderWaitTimes")
       // Get JSON from result.
       .then(response => response.json())
-      // Parse JSON and populate providers from data.
-      .then(data => populate(JSON.parse(data.d)));
+      .then((data) => {
+        // Parse JSON and populate providers from data.
+        populate(JSON.parse(data.d));
+
+        // Remove loading message.
+        loadingMessage.remove();
+
+        // Add hook indicating data has been successfully populated.
+        resultsList.setAttribute("data-populated", true);
+
+        // Get populated items.
+        resultItems = document.querySelectorAll(".provider-result");
+      });
   })();
 
   /**
    * Populates empty unordered list with list items containing provider data.
    */
   function populate(providers) {
-    console.log(providers);
-    
     providers.forEach((provider) => {
       // Destructure provider properties.
       const { ProviderID, DepartmentID, ProviderName, DepartmentName, WaitTime } = provider;
@@ -33,7 +42,7 @@ const Providers = (function() {
         <li class="provider-result" data-provider-id="${ProviderID}" data-department-id="${DepartmentID}">
           <div class="boxed-width">
             <div>
-              <p class="provider-result__name">
+              <p data-bind-filter-results class="provider-result__name">
                 ${ProviderName} (${DepartmentName}):
                 <br><span style="font-weight: 400">${getWaitTime(parseInt(WaitTime))}</span>
               </p>
@@ -48,16 +57,7 @@ const Providers = (function() {
 
       // Convert result string to fragment and append to results ul.
       resultsList.appendChild(document.createRange().createContextualFragment(result));
-
-      // Remove loading message.
-      loadingMessage.remove();
     });
-
-    // Add hook indicating data has been successfully populated.
-    resultsList.setAttribute("data-populated", true);
-
-    // Get populated items.
-    resultItems = document.querySelectorAll(".provider-result");
   }
 
   /**
@@ -100,7 +100,7 @@ const Providers = (function() {
 
     resultItems.forEach((result) => {
       // Get result.
-      const resultName = result.querySelector(".provider-result__name").textContent;
+      const resultName = result.querySelector("[data-bind-filter-results]").textContent;
 
       // If result matches the current search term...
       if(resultName.toUpperCase().indexOf(currentValue.toUpperCase()) > -1) {
